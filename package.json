@@ -27,7 +27,8 @@
     "angular": ">=1.2.0",
     "lodash": "~2",
     "dc": "2.0.0-beta.32",
-    "crossfilter2": "~1.3.14"
+    "crossfilter2": "~1.3.14",
+    "crossfilter": "~1.3.12"
   },
   "devDependencies": {
     "bower": "^1.3.12",
