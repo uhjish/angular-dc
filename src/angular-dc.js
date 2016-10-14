@@ -1,5 +1,8 @@
 'use strict';
 
+/* jshint -W003 */
+/* jshint -W107 */
+
 var angularDc = angular.module('angularDc', []);
 
 /* The main directive in angularDc, responsible creating Dc.js charts.
