@@ -47,8 +47,8 @@ See the bower.json file for dependencies: [bower.json][bower.json]
 ```
 
 ## Examples
-- [Simple pie chart](example/stocks/pie.html)
-- [Nasdaq charts][example/stocks/nasdaq.html]
+- [Simple pie chart](https://tomsaleeba.github.io/angular-dc/example/stocks/pie.html)
+- [Nasdaq charts](https://tomsaleeba.github.io/angular-dc/example/stocks/nasdaq.html)
 - [Contribute][help-examples]
 
 [help-examples]: https://github.com/TomNeyland/angular-dc/issues/2
