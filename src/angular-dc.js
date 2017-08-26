@@ -30,7 +30,7 @@ angularDc.directive('dcChart', ['$timeout',
        the $scope and the html element.
      */
 
-        function setupChart(scope, iElement, iAttrs, options) {
+        function setupChart(scope, iElement, iAttrs) {
 
             // Get the element this directive blongs to, the root of chart
             var chartElement = iElement[0],
@@ -58,7 +58,7 @@ angularDc.directive('dcChart', ['$timeout',
             // Get additional options from chartElement's html attributes.
             // All options are prepended with 'dc-'' to avoid clashing with html own meaning (e.g width)
             // All options are parsed in angular's $parse language, so beware, it is not javascript!
-            options = getOptionsFromAttrs(scope, iAttrs, validOptions);
+            var options = getOptionsFromAttrs(scope, iAttrs, validOptions);
 
             // we may have a dc-options attribute which contain a javascript object for stuff
             // not writtable in $parse language
@@ -100,30 +100,25 @@ angularDc.directive('dcChart', ['$timeout',
         }
 
         function getValidOptionsForChart(chart) {
-
             // all chart options are exposed via a function
-            return _(chart).functions()
-                .extend(directiveOptions)
-                .map(function(s) {
-                    return 'dc' + s.charAt(0).toUpperCase() + s.substring(1);
-                })
-                .value();
+            return _(chart).functions().value().concat(directiveOptions).map(function(s) {
+                return 'dc' + s.charAt(0).toUpperCase() + s.substring(1);
+            });
         }
 
         function getOptionsFromAttrs(scope, iAttrs, validOptions) {
             return _(iAttrs.$attr)
                 .keys()
                 .intersection(validOptions)
-                .map(function(key) {
+                .reduce(function(accumulator, key) {
                     var value = scope.$eval(iAttrs[key]);
                     // remove the dc- prefix if any
                     if (key.substring(0, 2) === 'dc') {
                         key = key.charAt(2).toLowerCase() + key.substring(3);
                     }
-                    return [key, value];
-                })
-                .zipObject()
-                .value();
+                    accumulator[key] = value;
+                    return accumulator;
+                }, {});
         }
         return {
             restrict: 'A',
@@ -163,7 +158,7 @@ angularDc.directive('dcChart', ['$timeout',
                                 return undefined;
                             }
                         });
-                    if (options.any(_.isUndefined)) {
+                    if (options.some(_.isUndefined)) {
                         // return undefined if there is at least one undefined option
                         // so that the $watch dont call us again at this $digest time
                         return undefined;
@@ -222,7 +217,7 @@ angularDc.directive('dcSelect', [
             link: function(scope, iElement, iAttrs) {
                 scope.$watch('dcDimension', function(dimension) {
                     var allkeys, chart;
-                    if (dimension !== null) {
+                    if (typeof dimension !== 'undefined' && dimension !== null) {
                         // we make a fake chart so that the dimension is known by dc.filterAll()
                         chart = dc.baseMixin({});
                         chart.dimension(dimension);
@@ -237,7 +232,7 @@ angularDc.directive('dcSelect', [
                     }
                 });
                 return scope.$watch('selectModel', function(sel) {
-                    if (scope.dcDimension !== null) {
+                    if (typeof scope.dcDimension !== 'undefined' && scope.dcDimension !== null) {
                         if (sel !== null && sel.key !== scope.allLabel) {
                             scope.dcDimension.filter(function(d) {
                                 return d === sel.key;
