@@ -1,3 +1,7 @@
+# Fork note
+
+This is a fork of a PR for a fork...and so on. Other's have updated the dependencies, I just got the code working with the new dependencies and fixed up the examples. I'm happy for this to be PR'd back into a more "main" repo.
+
 # angular-dc
 
 AngularJS directives for dc.js
@@ -26,11 +30,16 @@ See the bower.json file for dependencies: [bower.json][bower.json]
 ```html
 <script src="angular.js"></script>
 <script src="dist/angular-dc.min.js"></script>
-<!--don't forget to include all dependencies-->
+<!--don't forget to include all dependencies, for example:-->
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.css"/>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/crossfilter2/1.3.14/crossfilter.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.min.js"></script>
 <script>
-//load the angular-dc module in your app
-angular.module("myApp", ['angularDc']);
-// some angularjs controller code...
+  //load the angular-dc module in your app
+  angular.module("myApp", ['angularDc']);
+  // some angularjs controller code...
 </script>
 
 <!--Setup a simple pie chart. DC.js options are exposed as html attributes-->
@@ -38,12 +47,10 @@ angular.module("myApp", ['angularDc']);
 ```
 
 ## Examples
-- [Simple pie chart][pie]
-- [Nasdaq charts][nasqad]
+- [Simple pie chart](https://tomsaleeba.github.io/angular-dc/example/stocks/pie.html)
+- [Nasdaq charts](https://tomsaleeba.github.io/angular-dc/example/stocks/nasdaq.html)
 - [Contribute][help-examples]
 
-[pie]: https://tomneyland.github.io/angular-dc/example/stocks/pie.html
-[nasqad]: https://tomneyland.github.io/angular-dc/example/stocks/nasdaq.html
 [help-examples]: https://github.com/TomNeyland/angular-dc/issues/2
 
 

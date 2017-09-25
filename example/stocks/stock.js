@@ -1,6 +1,6 @@
 
-angular.module("app", ["angularDc", "angularJade"])
-myController = function($scope) {
+var app = angular.module("app", ["angularDc", "angularJade"])
+app.controller('myController', function($scope) {
     d3.csv("ndx.csv", function (data) {
         /* since its a csv file we need to format the data a bit */
         var dateFormat = d3.time.format("%m/%d/%Y");
@@ -246,4 +246,4 @@ myController = function($scope) {
         }
         $scope.$apply();
     });
-}
+})
